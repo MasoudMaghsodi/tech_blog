@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tech_blog/my_colors.dart';
 import 'package:tech_blog/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: solidColors.statusBarColor,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: solidColors.systemNavigationBarColor,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ),
+  );
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +31,6 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: const [
         Locale('fa'), // Persian
-        Locale('en'), // English
       ],
       theme: ThemeData(
         fontFamily: "dana",
