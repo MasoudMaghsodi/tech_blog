@@ -2,6 +2,8 @@ import 'dart:ui';
 
 // ignore: camel_case_types
 class solidColors {
+  static const Color posterSubTitle = Color.fromARGB(200, 255, 255, 255);
+  static const Color posterTitle = Color.fromARGB(255, 255, 255, 255);
   static const Color primeryColor = Color.fromARGB(255, 64, 4, 87);
   static const Color colorTitle = Color.fromARGB(255, 40, 107, 184);
   static const Color textTitle = Color.fromARGB(255, 0, 0, 0);
