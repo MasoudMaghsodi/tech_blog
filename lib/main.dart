@@ -70,6 +70,12 @@ class MyApp extends StatelessWidget {
             color: Colors.green,
             fontWeight: FontWeight.w700,
           ),
+          headlineSmall: TextStyle(
+            fontFamily: 'dana',
+            fontSize: 14,
+            color: solidColors.seeMore,
+            fontWeight: FontWeight.w700,
+          ),
         ),
       ),
       debugShowCheckedModeBanner: false,
