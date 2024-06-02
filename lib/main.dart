@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tech_blog/my_colors.dart';
 import 'package:tech_blog/view/register_intro.dart';
-import 'package:tech_blog/view/splash_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -34,6 +33,40 @@ class MyApp extends StatelessWidget {
         Locale('fa'), // Persian
       ],
       theme: ThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(
+              width: 2,
+            ),
+          ),
+          filled: true,
+          fillColor: Colors.white,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            textStyle: WidgetStateProperty.resolveWith(
+              (states) {
+                if (states.contains(WidgetState.pressed)) {
+                  return const TextStyle(
+                    fontSize: 25,
+                  );
+                }
+                return const TextStyle(
+                  fontSize: 20,
+                );
+              },
+            ),
+            backgroundColor: WidgetStateProperty.resolveWith(
+              (states) {
+                if (states.contains(WidgetState.pressed)) {
+                  return solidColors.seeMore;
+                }
+                return solidColors.primeryColor;
+              },
+            ),
+          ),
+        ),
         fontFamily: "dana",
         textTheme: const TextTheme(
           displayLarge: TextStyle(
@@ -81,6 +114,12 @@ class MyApp extends StatelessWidget {
             fontFamily: 'dana',
             fontSize: 14,
             color: solidColors.textTitle,
+            fontWeight: FontWeight.w700,
+          ),
+          labelSmall: TextStyle(
+            fontFamily: 'dana',
+            fontSize: 14,
+            color: solidColors.hintText,
             fontWeight: FontWeight.w700,
           ),
         ),
