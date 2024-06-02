@@ -11,6 +11,8 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
+final GlobalKey<ScaffoldState> _key = GlobalKey();
+
 class _MainScreenState extends State<MainScreen> {
   var selectedPageIndex = 0;
 
@@ -22,15 +24,80 @@ class _MainScreenState extends State<MainScreen> {
 
     return SafeArea(
       child: Scaffold(
+        key: _key,
+        drawer: Drawer(
+          backgroundColor: solidColors.statusBarColor,
+          child: Padding(
+            padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
+            child: ListView(
+              children: [
+                DrawerHeader(
+                  child: Center(
+                    child: Image.asset(
+                      Assets.images.splash.path,
+                      scale: 3,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    "پروفایل کاربری",
+                    style: textTheme.headlineLarge,
+                  ),
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: solidColors.divider,
+                ),
+                ListTile(
+                  title: Text(
+                    "درباره تک بلاگ",
+                    style: textTheme.headlineLarge,
+                  ),
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: solidColors.divider,
+                ),
+                ListTile(
+                  title: Text(
+                    "اشتراک گذاری تک بلاگ",
+                    style: textTheme.headlineLarge,
+                  ),
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: solidColors.divider,
+                ),
+                ListTile(
+                  title: Text(
+                    "تک بلاگ در گیت هاب",
+                    style: textTheme.headlineLarge,
+                  ),
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: solidColors.divider,
+                ),
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: solidColors.statusBarColor,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Icon(
-                Icons.menu,
-                color: Colors.black,
+              InkWell(
+                onTap: () {
+                  _key.currentState!.openDrawer();
+                },
+                child: const Icon(
+                  Icons.menu,
+                  color: Colors.black,
+                ),
               ),
               Assets.images.splash.image(height: size.height / 13.6),
               const Icon(
@@ -90,7 +157,7 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 0,
+      bottom: 8,
       right: 0,
       left: 0,
       child: Container(

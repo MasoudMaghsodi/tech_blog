@@ -20,6 +20,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/bluepen.png
   AssetGenImage get bluepen => const AssetGenImage('assets/icons/bluepen.png');
 
+  /// File path: assets/icons/downCatArrow.png
+  AssetGenImage get downCatArrow =>
+      const AssetGenImage('assets/icons/downCatArrow.png');
+
   /// File path: assets/icons/hashtagicon.png
   AssetGenImage get hashtagicon =>
       const AssetGenImage('assets/icons/hashtagicon.png');
@@ -35,7 +39,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [bluemic, bluepen, hashtagicon, home, user, w];
+      [bluemic, bluepen, downCatArrow, hashtagicon, home, user, w];
 }
 
 class $AssetsImagesGen {
