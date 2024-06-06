@@ -1,4 +1,6 @@
 class MyStrings {
+  static const String techBlogGithubUrl =
+      "https://github.com/MasoudMaghsodi/tech_blog";
   static const String viewHotestBlog = "مشاهده داغ ترین نوشته ها";
   static const String viewHotestPodacasts = "مشاهده داغ ترین پادکست ها";
   static const String submitPodacasts = "ارسال پادکست";
@@ -12,6 +14,10 @@ class MyStrings {
 
 برای ارسال مطلب و پادکست باید حتما 
 ثبت نام کنی  """;
+  static const shareText = """
+  من از تک بلاگ استفاده میکنم خیلی باحاله تو هم داشته  باش\n
+  https://github.com/MasoudMaghsodi
+   """;
   static const successfulRegistration = """ تبریک میگم ایمیل با موفقیت تایید شد
   لطفا اطلاعات ثبت نام رو کامل کن """;
   static const String insertYourEmail = "  لطفا ایمیل خود را وارد کنید ";
