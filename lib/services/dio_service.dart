@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'dart:developer';
 
 class DioService {
   Future<dynamic> getMethod(String url) async {
@@ -10,7 +9,7 @@ class DioService {
             options: Options(responseType: ResponseType.json, method: 'GET'))
         .then(
       (response) {
-        log(response.toString());
+        // log(response.toString());
         return response;
       },
     );
