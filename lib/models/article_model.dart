@@ -9,6 +9,7 @@ class ArticleModel {
   String? author;
   String? view;
   String? status;
+  // String? isFavorite;
   String? createdAt;
 
   ArticleModel({
@@ -20,6 +21,7 @@ class ArticleModel {
     required this.author,
     required this.view,
     required this.status,
+    // this.isFavorite,
     required this.createdAt,
   });
 
@@ -31,6 +33,7 @@ class ArticleModel {
     catName = element["cat_name"];
     author = element["author"];
     view = element["view"];
+    status = element["status"];
     status = element["status"];
     createdAt = element["created_at"];
   }
