@@ -34,7 +34,7 @@ class ArticleModel {
     author = element["author"];
     view = element["view"];
     status = element["status"];
-    status = element["status"];
+    // status = element["status"];
     createdAt = element["created_at"];
   }
 }

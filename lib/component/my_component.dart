@@ -67,7 +67,7 @@ class MainTags extends StatelessWidget {
 
 PreferredSize appBar(String title) {
   return PreferredSize(
-    preferredSize: const Size.fromHeight(80),
+    preferredSize: const Size.fromHeight(60),
     child: Padding(
       padding: const EdgeInsets.all(12.0),
       child: AppBar(
