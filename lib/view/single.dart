@@ -27,6 +27,7 @@ class _SingleState extends State<Single> {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -138,7 +139,7 @@ class _SingleState extends State<Single> {
                 const SizedBox(
                   height: 20,
                 ),
-                simmilar(size, textTheme),
+                simillar(textTheme, size),
               ],
             ),
           ),
@@ -152,7 +153,7 @@ class _SingleState extends State<Single> {
       height: 50,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
+        itemCount: singleArticleController.tagList.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.fromLTRB(0, 8, 15, 8),
@@ -170,7 +171,7 @@ class _SingleState extends State<Single> {
                       width: 8,
                     ),
                     Text(
-                      "tagTitle",
+                      singleArticleController.tagList[index].title!,
                       style: textTheme.displayMedium,
                     ),
                   ],
@@ -183,16 +184,16 @@ class _SingleState extends State<Single> {
     );
   }
 
-  Widget simmilar(size, textTheme) {
+  Widget simillar(textTheme, size) {
     return SizedBox(
       height: size.height / 4.1,
       child: Obx(
         () => ListView.builder(
-          itemCount: 10,
+          itemCount: singleArticleController.relatedList.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: ((context, index) {
             return Padding(
-              padding: const EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 15),
               child: Column(
                 children: [
                   Padding(
@@ -204,14 +205,16 @@ class _SingleState extends State<Single> {
                         children: [
                           CachedNetworkImage(
                             imageUrl: singleArticleController
-                                .articleInfoModel.value.image!,
+                                .relatedList[index].image!,
                             imageBuilder: (context, imageProvider) => Container(
                               decoration: BoxDecoration(
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(16),
                                 ),
                                 image: DecorationImage(
-                                    image: imageProvider, fit: BoxFit.cover),
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             placeholder: (context, url) => const loading(),
@@ -229,15 +232,21 @@ class _SingleState extends State<Single> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
-                                  ' hiiii',
+                                  singleArticleController
+                                      .relatedList[index].author!,
                                   style: textTheme.titleLarge,
                                 ),
-                                const Row(
+                                Row(
                                   children: [
-                                    SizedBox(
+                                    Text(
+                                      singleArticleController
+                                          .relatedList[index].view!,
+                                      style: textTheme.titleLarge,
+                                    ),
+                                    const SizedBox(
                                       width: 8,
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.remove_red_eye_sharp,
                                       color: Colors.white,
                                       size: 16,
@@ -253,8 +262,8 @@ class _SingleState extends State<Single> {
                   ),
                   SizedBox(
                     width: size.width / 2.4,
-                    child: const Text(
-                      'title',
+                    child: Text(
+                      singleArticleController.relatedList[index].title!,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),

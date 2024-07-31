@@ -10,7 +10,7 @@ class SingleArticleController extends GetxController {
   RxInt id = RxInt(0);
   Rx<ArticleInfoModel> articleInfoModel = ArticleInfoModel().obs;
   RxList<TagsModel> tagList = RxList();
-  RxList<ArticleModel> releatedList = RxList();
+  RxList<ArticleModel> relatedList = RxList();
 
   @override
   onInit() {
@@ -33,9 +33,9 @@ class SingleArticleController extends GetxController {
     response.data['tags'].forEach((element) {
       tagList.add(TagsModel.fromJson(element));
     });
-    // releated.clear();
-    response.data['releated'].forEach((element) {
-      releatedList.add(ArticleModel.fromJson(element));
+    relatedList.clear();
+    response.data['related'].forEach((element) {
+      relatedList.add(ArticleModel.fromJson(element));
     });
   }
 }
