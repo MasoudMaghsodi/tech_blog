@@ -1,6 +1,8 @@
+import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:tech_blog/models/article_model.dart';
 import 'package:tech_blog/models/tags_model.dart';
+import 'package:tech_blog/view/single.dart';
 import '../component/api_constant.dart';
 import '../models/article_info_model.dart';
 import '../services/dio_service.dart';
@@ -15,10 +17,11 @@ class SingleArticleController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    getArticleInfo();
+    getArticleInfo(id);
   }
 
-  getArticleInfo() async {
+  getArticleInfo(var id) async {
+    articleInfoModel = ArticleInfoModel().obs;
     loading.value = true;
     //TODO user id is hard code
     var userId = '';
@@ -37,5 +40,7 @@ class SingleArticleController extends GetxController {
     response.data['related'].forEach((element) {
       relatedList.add(ArticleModel.fromJson(element));
     });
+
+    Get.to(Single());
   }
 }

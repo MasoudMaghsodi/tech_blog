@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/controller/list_article_controller.dart';
-import 'package:tech_blog/view/single.dart';
-
 import '../controller/single_article_controller.dart';
 
 // ignore: must_be_immutable
 class ArticleListScreen extends StatelessWidget {
-  ArticleListScreen({super.key});
+  String title;
+  ArticleListScreen({required this.title, super.key});
+
   ListArticleController listArticleController =
       Get.put(ListArticleController());
   SingleArticleController singletArticleController =
@@ -21,7 +21,7 @@ class ArticleListScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        appBar: appBar("مقالات جدید"),
+        appBar: appBar(title),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Obx(
@@ -31,11 +31,8 @@ class ArticleListScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    singletArticleController.id.value = int.parse(
-                        listArticleController.articleList[index].id.toString());
-                    Get.to(
-                      Single(),
-                    );
+                    singletArticleController.getArticleInfo(
+                        listArticleController.articleList[index].id!);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
