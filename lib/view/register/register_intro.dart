@@ -1,13 +1,18 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/component/my_colors.dart';
 import 'package:tech_blog/component/my_strings.dart';
-import 'package:tech_blog/view/my_cats.dart';
 import 'package:validators/validators.dart';
 
 class RegisterIntro extends StatelessWidget {
-  const RegisterIntro({super.key});
+  RegisterIntro({super.key});
+
+  RegisterController registerController = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -84,9 +89,9 @@ class RegisterIntro extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(24),
                     child: TextField(
+                      controller: registerController.emailTextEditingController,
                       onChanged: (value) {
-                        print(
-                            value + " is Email : " + isEmail(value).toString());
+                        debugPrint("$value is Email : ${isEmail(value)}");
                       },
                       style: textTheme.headlineLarge,
                       textAlign: TextAlign.center,
@@ -98,6 +103,7 @@ class RegisterIntro extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      registerController.register();
                       Navigator.pop(context);
                       _activateCodeBottomSheet(context, size, textTheme);
                     },
@@ -148,9 +154,10 @@ class RegisterIntro extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(24),
                     child: TextField(
+                      controller:
+                          registerController.activeCodeTextEditingController,
                       onChanged: (value) {
-                        print(
-                            value + " is Email : " + isEmail(value).toString());
+                        debugPrint("$value is Email : ${isEmail(value)}");
                       },
                       style: textTheme.headlineLarge,
                       textAlign: TextAlign.center,
@@ -162,11 +169,12 @@ class RegisterIntro extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const MyCates(),
-                        ),
-                      );
+                      registerController.verify();
+                      // Navigator.of(context).pushReplacement(
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const MyCates(),
+                      //   ),
+                      // );
                     },
                     child: const Text(
                       'ادامه',

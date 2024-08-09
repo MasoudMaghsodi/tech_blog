@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:tech_blog/models/article_model.dart';
 import 'package:tech_blog/models/tags_model.dart';
 import 'package:tech_blog/view/single.dart';

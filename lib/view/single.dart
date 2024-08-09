@@ -27,7 +27,7 @@ class Single extends StatelessWidget {
             () => singleArticleController.articleInfoModel.value.image == null
                 ? SizedBox(
                     height: Get.height,
-                    child: const loading(),
+                    child: const Loading(),
                   )
                 : Column(
                     children: [
@@ -38,7 +38,7 @@ class Single extends StatelessWidget {
                                 .articleInfoModel.value.image!,
                             imageBuilder: (context, imageProvider) =>
                                 Image(image: imageProvider),
-                            placeholder: (context, url) => const loading(),
+                            placeholder: (context, url) => const Loading(),
                             errorWidget: (context, url, error) => Image.asset(
                               Assets.images.singlePlaceHolder.path,
                             ),
@@ -132,7 +132,7 @@ class Single extends StatelessWidget {
                           enableCaching: true,
                           onLoadingBuilder:
                               (context, element, loadingProgress) =>
-                                  const loading(),
+                                  const Loading(),
                         ),
                       ),
                       tags(textTheme),
@@ -236,7 +236,7 @@ class Single extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              placeholder: (context, url) => const loading(),
+                              placeholder: (context, url) => const Loading(),
                               errorWidget: (context, url, error) => const Icon(
                                 Icons.image_not_supported_outlined,
                                 size: 50,

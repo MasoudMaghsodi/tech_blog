@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/component/my_strings.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/component/my_colors.dart';
+import 'package:tech_blog/view/register/register_intro.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
 
@@ -192,7 +193,10 @@ class BottomNavigation extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    //TODO Check Login Status
+                    Get.to(RegisterIntro());
+                  },
                   icon: ImageIcon(
                     Assets.icons.w.provider(),
                     color: Colors.white,

@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 )
-              : const Center(child: loading()),
+              : const Center(child: Loading()),
         ),
       ),
     );
@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                                       image: imageProvider, fit: BoxFit.cover),
                                 ),
                               ),
-                              placeholder: (context, url) => const loading(),
+                              placeholder: (context, url) => const Loading(),
                               errorWidget: (context, url, error) => const Icon(
                                 Icons.image_not_supported_outlined,
                                 size: 50,
@@ -197,7 +197,7 @@ class HomeScreen extends StatelessWidget {
                                 image: imageProvider, fit: BoxFit.cover),
                           ),
                         ),
-                        placeholder: (context, url) => const loading(),
+                        placeholder: (context, url) => const Loading(),
                         errorWidget: (context, url, error) => const Icon(
                           Icons.image_not_supported_outlined,
                           size: 50,
@@ -248,7 +248,7 @@ class HomeScreen extends StatelessWidget {
                 image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
               ),
             ),
-            placeholder: (context, url) => const loading(),
+            placeholder: (context, url) => const Loading(),
             errorWidget: (context, url, error) => const Icon(
               Icons.image_not_supported_outlined,
               size: 50,

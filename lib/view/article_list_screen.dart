@@ -57,7 +57,7 @@ class ArticleListScreen extends StatelessWidget {
                               );
                             },
                             placeholder: (context, url) {
-                              return const loading();
+                              return const Loading();
                             },
                             errorWidget: (context, url, error) {
                               return const Icon(
