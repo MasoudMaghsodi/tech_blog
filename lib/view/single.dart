@@ -13,8 +13,7 @@ import '../gen/assets.gen.dart';
 class Single extends StatelessWidget {
   Single({super.key});
 
-  SingleArticleController singleArticleController =
-      Get.put(SingleArticleController());
+  var singleArticleController = Get.find<SingleArticleController>();
 
   @override
   Widget build(BuildContext context) {

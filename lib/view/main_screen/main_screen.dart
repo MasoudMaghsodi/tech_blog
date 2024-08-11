@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/component/my_strings.dart';
+import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/component/my_colors.dart';
-import 'package:tech_blog/view/register/register_intro.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
 
@@ -155,7 +155,6 @@ class BottomNavigation extends StatelessWidget {
 
   final Size size;
   final double bodyMargin;
-
   final Function(int) changeScreen;
 
   @override
@@ -194,8 +193,7 @@ class BottomNavigation extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    //TODO Check Login Status
-                    Get.to(RegisterIntro());
+                    Get.find<RegisterController>().toggleLogin();
                   },
                   icon: ImageIcon(
                     Assets.icons.w.provider(),
