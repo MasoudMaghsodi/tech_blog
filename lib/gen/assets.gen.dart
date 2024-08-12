@@ -60,6 +60,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/splash.png
   AssetGenImage get splash => const AssetGenImage('assets/images/splash.png');
 
+  /// File path: assets/images/tcbot_empty.png
+  AssetGenImage get tcbotEmpty =>
+      const AssetGenImage('assets/images/tcbot_empty.png');
+
   /// File path: assets/images/techbot.svg
   SvgGenImage get techbot => const SvgGenImage('assets/images/techbot.svg');
 
@@ -80,6 +84,7 @@ class $AssetsImagesGen {
         posterTest,
         singlePlaceHolder,
         splash,
+        tcbotEmpty,
         techbot,
         test,
         writeArticle,

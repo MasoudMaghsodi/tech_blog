@@ -87,18 +87,23 @@ PreferredSize appBar(String title) {
             ),
           ),
         ],
-        leading: Padding(
-          padding: const EdgeInsets.only(right: 16.0),
-          child: Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              color: solidColors.primeryColor.withBlue(100),
-              shape: BoxShape.circle,
-            ),
-            child: const Icon(
-              Icons.keyboard_arrow_right_rounded,
-              color: Colors.white,
+        leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                color: solidColors.primeryColor.withBlue(100),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.keyboard_arrow_right_rounded,
+                color: Colors.white,
+              ),
             ),
           ),
         ),

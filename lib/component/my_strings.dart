@@ -14,6 +14,8 @@ class MyStrings {
 
 برای ارسال مطلب و پادکست باید حتما 
 ثبت نام کنی  """;
+  static const String articleEmpty =
+      """ هنوز هیچ مقاله ای به جامعه گیک های فارسی اضافه نکردی !!! """;
   static const shareText = """
   من از تک بلاگ استفاده میکنم خیلی باحاله تو هم داشته  باش\n
   https://github.com/MasoudMaghsodi

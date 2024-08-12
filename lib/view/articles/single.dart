@@ -4,10 +4,10 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/component/my_colors.dart';
 import 'package:tech_blog/component/my_component.dart';
-import 'package:tech_blog/controller/list_article_controller.dart';
-import 'package:tech_blog/controller/single_article_controller.dart';
-import 'package:tech_blog/view/article_list_screen.dart';
-import '../gen/assets.gen.dart';
+import 'package:tech_blog/controller/article/list_article_controller.dart';
+import 'package:tech_blog/controller/article/single_article_controller.dart';
+import 'package:tech_blog/view/articles/article_list_screen.dart';
+import '../../gen/assets.gen.dart';
 
 // ignore: must_be_immutable
 class Single extends StatelessWidget {

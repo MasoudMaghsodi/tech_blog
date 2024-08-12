@@ -6,8 +6,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/binding.dart';
 import 'package:tech_blog/component/my_colors.dart';
 import 'package:tech_blog/my_http_overrides.dart';
+import 'package:tech_blog/view/articles/manage_article.dart';
 import 'package:tech_blog/view/main_screen/main_screen.dart';
-import 'package:tech_blog/view/single.dart';
+import 'package:tech_blog/view/articles/single.dart';
 import 'package:tech_blog/view/splash_screen.dart';
 
 void main() async {
@@ -37,14 +38,19 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       getPages: [
         GetPage(
-          name: routeMainScreen,
+          name: NamedRoute.routeMainScreen,
           page: () => MainScreen(),
           binding: RegisterBinding(),
         ),
         GetPage(
-          name: routeSingleArticle,
+          name: NamedRoute.routeSingleArticle,
           page: () => Single(),
           binding: ArticleBinding(),
+        ),
+        GetPage(
+          name: NamedRoute.manageArticle,
+          page: () => ManageArticle(),
+          binding: ArticleManagerBinding(),
         ),
       ],
       home: const SplashScreen(),
@@ -147,5 +153,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-const String routeMainScreen = '/MainScreen';
-const String routeSingleArticle = '/SingleArticle';
+class NamedRoute {
+  static String routeMainScreen = '/MainScreen';
+  static String routeSingleArticle = '/SingleArticle';
+  static String manageArticle = '/ManageArticle';
+}

@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/component/my_component.dart';
-import 'package:tech_blog/controller/list_article_controller.dart';
+import 'package:tech_blog/controller/article/list_article_controller.dart';
 import 'package:tech_blog/main.dart';
-import '../controller/single_article_controller.dart';
+import '../../controller/article/single_article_controller.dart';
 
 // ignore: must_be_immutable
 class ArticleListScreen extends StatelessWidget {
@@ -34,7 +34,7 @@ class ArticleListScreen extends StatelessWidget {
                   onTap: () {
                     singletArticleController.getArticleInfo(
                         listArticleController.articleList[index].id!);
-                    Get.toNamed(routeSingleArticle);
+                    Get.toNamed(NamedRoute.routeSingleArticle);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

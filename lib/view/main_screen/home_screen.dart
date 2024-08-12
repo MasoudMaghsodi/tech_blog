@@ -2,15 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/controller/home_screen_controller.dart';
-import 'package:tech_blog/controller/single_article_controller.dart';
+import 'package:tech_blog/controller/article/single_article_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/models/fake_data.dart';
 import 'package:tech_blog/component/my_colors.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/component/my_strings.dart';
-import 'package:tech_blog/view/article_list_screen.dart';
+import 'package:tech_blog/view/articles/article_list_screen.dart';
 
-import '../../controller/list_article_controller.dart';
+import '../../controller/article/list_article_controller.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
