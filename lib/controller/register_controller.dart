@@ -46,10 +46,10 @@ class RegisterController extends GetxController {
 
     switch (status) {
       case 'verified':
-        box.write(token, response.data['token']);
-        box.write(userId, response.data['user_id']);
-        debugPrint('read ::: ${box.read(token)}');
-        debugPrint('read ::: ${box.read(userId)}');
+        box.write(StorageKey.token, response.data['token']);
+        box.write(StorageKey.userId, response.data['user_id']);
+        debugPrint('read ::: ${box.read(StorageKey.token)}');
+        debugPrint('read ::: ${box.read(StorageKey.userId)}');
         Get.offAll(() => MainScreen());
         break;
       case 'incorrect_code':
@@ -62,7 +62,7 @@ class RegisterController extends GetxController {
   }
 
   toggleLogin() {
-    if (GetStorage().read(token) == null) {
+    if (GetStorage().read(StorageKey.token) == null) {
       Get.to(() => RegisterIntro());
     } else {
       routeToWriteBottomSheet();

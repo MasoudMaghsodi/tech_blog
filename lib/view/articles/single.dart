@@ -52,32 +52,37 @@ class Single extends StatelessWidget {
                                   colors: gradiantColors.singleAppbarGradient,
                                 ),
                               ),
-                              child: const Row(
+                              child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 20,
                                   ),
-                                  Icon(
-                                    Icons.arrow_back,
-                                    color: Colors.white,
-                                    size: 24,
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    child: const Icon(
+                                      Icons.arrow_back,
+                                      color: Colors.white,
+                                      size: 24,
+                                    ),
                                   ),
-                                  Expanded(child: SizedBox()),
-                                  Icon(
+                                  const Expanded(child: SizedBox()),
+                                  const Icon(
                                     Icons.bookmark_border_rounded,
                                     color: Colors.white,
                                     size: 24,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 20,
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.share,
                                     color: Colors.white,
                                     size: 24,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 20,
                                   ),
                                 ],

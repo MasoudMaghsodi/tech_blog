@@ -9,7 +9,8 @@ import '../../services/dio_service.dart';
 class SingleArticleController extends GetxController {
   RxBool loading = false.obs;
   RxInt id = RxInt(0);
-  Rx<ArticleInfoModel> articleInfoModel = ArticleInfoModel().obs;
+  Rx<ArticleInfoModel> articleInfoModel =
+      ArticleInfoModel(null, null, null).obs;
   RxList<TagsModel> tagList = RxList();
   RxList<ArticleModel> relatedList = RxList();
 
@@ -20,7 +21,7 @@ class SingleArticleController extends GetxController {
   }
 
   getArticleInfo(var id) async {
-    articleInfoModel = ArticleInfoModel().obs;
+    articleInfoModel = ArticleInfoModel(null, null, null).obs;
     loading.value = true;
     //TODO user id is hard code
     var userId = '';

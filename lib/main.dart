@@ -7,6 +7,7 @@ import 'package:tech_blog/binding.dart';
 import 'package:tech_blog/component/my_colors.dart';
 import 'package:tech_blog/my_http_overrides.dart';
 import 'package:tech_blog/view/articles/manage_article.dart';
+import 'package:tech_blog/view/articles/single_manage_article.dart';
 import 'package:tech_blog/view/main_screen/main_screen.dart';
 import 'package:tech_blog/view/articles/single.dart';
 import 'package:tech_blog/view/splash_screen.dart';
@@ -50,6 +51,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: NamedRoute.manageArticle,
           page: () => ManageArticle(),
+          binding: ArticleManagerBinding(),
+        ),
+        GetPage(
+          name: NamedRoute.singleManageArticle,
+          page: () => SingleManageArticle(),
           binding: ArticleManagerBinding(),
         ),
       ],
@@ -157,4 +163,5 @@ class NamedRoute {
   static String routeMainScreen = '/MainScreen';
   static String routeSingleArticle = '/SingleArticle';
   static String manageArticle = '/ManageArticle';
+  static String singleManageArticle = '/SingleManageArticle';
 }

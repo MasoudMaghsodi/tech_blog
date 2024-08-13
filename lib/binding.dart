@@ -19,7 +19,7 @@ class ArticleManagerBinding implements Bindings {
   void dependencies() {
     // TODO: implement dependencies
 
-    Get.put(() => ManageArticleController());
+    Get.lazyPut(() => ManageArticleController());
   }
 }
 

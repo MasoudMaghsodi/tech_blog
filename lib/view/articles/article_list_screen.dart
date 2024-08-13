@@ -26,92 +26,96 @@ class ArticleListScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Obx(
-            () => ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: listArticleController.articleList.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    singletArticleController.getArticleInfo(
-                        listArticleController.articleList[index].id!);
-                    Get.toNamed(NamedRoute.routeSingleArticle);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: size.height / 6,
-                          width: size.width / 3,
-                          child: CachedNetworkImage(
-                            imageUrl:
-                                listArticleController.articleList[index].image!,
-                            imageBuilder: (context, imageProvider) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  image: DecorationImage(
-                                    image: imageProvider,
-                                    fit: BoxFit.cover,
-                                  ),
+            () => !singletArticleController.loading.value
+                ? ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: listArticleController.articleList.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () async {
+                          await singletArticleController.getArticleInfo(
+                              listArticleController.articleList[index].id!);
+                          Get.toNamed(NamedRoute.routeSingleArticle);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: size.height / 6,
+                                width: size.width / 3,
+                                child: CachedNetworkImage(
+                                  imageUrl: listArticleController
+                                      .articleList[index].image!,
+                                  imageBuilder: (context, imageProvider) {
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(16),
+                                        image: DecorationImage(
+                                          image: imageProvider,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  placeholder: (context, url) {
+                                    return const Loading();
+                                  },
+                                  errorWidget: (context, url, error) {
+                                    return const Icon(
+                                      Icons.image_not_supported_outlined,
+                                      size: 50,
+                                      color: Colors.grey,
+                                    );
+                                  },
                                 ),
-                              );
-                            },
-                            placeholder: (context, url) {
-                              return const Loading();
-                            },
-                            errorWidget: (context, url, error) {
-                              return const Icon(
-                                Icons.image_not_supported_outlined,
-                                size: 50,
-                                color: Colors.grey,
-                              );
-                            },
+                              ),
+                              const SizedBox(
+                                width: 16,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: size.width / 2,
+                                    child: Text(
+                                      listArticleController
+                                          .articleList[index].title!,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        listArticleController
+                                            .articleList[index].author!,
+                                        style: textTheme.labelSmall,
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      Text(
+                                        '${listArticleController.articleList[index].view!} بازدید ',
+                                        style: textTheme.labelSmall,
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
                           ),
                         ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: size.width / 2,
-                              child: Text(
-                                listArticleController.articleList[index].title!,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  listArticleController
-                                      .articleList[index].author!,
-                                  style: textTheme.labelSmall,
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  '${listArticleController.articleList[index].view!} بازدید ',
-                                  style: textTheme.labelSmall,
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
+                      );
+                    },
+                  )
+                : const Loading(),
           ),
         ),
       ),
