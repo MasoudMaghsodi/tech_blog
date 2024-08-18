@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/component/my_colors.dart';
+import 'package:tech_blog/constant/my_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TechDivider extends StatelessWidget {
@@ -131,6 +131,41 @@ class Loading extends StatelessWidget {
     return const SpinKitFadingCube(
       color: solidColors.primeryColor,
       size: 32,
+    );
+  }
+}
+
+class SeeMoreBlog extends StatelessWidget {
+  const SeeMoreBlog({
+    super.key,
+    required this.bodyMargin,
+    required this.textTheme,
+    required this.title,
+  });
+
+  final double bodyMargin;
+  final TextTheme textTheme;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(right: bodyMargin, bottom: 8),
+      child: Row(
+        children: [
+          ImageIcon(
+            Assets.icons.bluepen.provider(),
+            color: solidColors.seeMore,
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Text(
+            title,
+            style: textTheme.headlineSmall,
+          ),
+        ],
+      ),
     );
   }
 }

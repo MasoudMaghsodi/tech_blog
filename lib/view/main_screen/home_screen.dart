@@ -5,9 +5,9 @@ import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:tech_blog/controller/article/single_article_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/models/fake_data.dart';
-import 'package:tech_blog/component/my_colors.dart';
+import 'package:tech_blog/constant/my_colors.dart';
 import 'package:tech_blog/component/my_component.dart';
-import 'package:tech_blog/component/my_strings.dart';
+import 'package:tech_blog/constant/my_strings.dart';
 import 'package:tech_blog/view/articles/article_list_screen.dart';
 
 import '../../controller/article/list_article_controller.dart';
@@ -47,10 +47,14 @@ class HomeScreen extends StatelessWidget {
                       height: 32,
                     ),
                     GestureDetector(
-                        onTap: () =>
-                            Get.to(ArticleListScreen(title: "مقالات جدید")),
-                        child: SeeMoreBlog(
-                            bodyMargin: bodyMargin, textTheme: textTheme)),
+                      onTap: () =>
+                          Get.to(ArticleListScreen(title: "مقالات جدید")),
+                      child: SeeMoreBlog(
+                        bodyMargin: bodyMargin,
+                        textTheme: textTheme,
+                        title: MyStrings.viewHotestBlog,
+                      ),
+                    ),
                     topVisited(),
                     const SizedBox(
                       height: 32,
@@ -356,39 +360,6 @@ class SeeMorePodacast extends StatelessWidget {
           ),
           Text(
             MyStrings.viewHotestPodacasts,
-            style: textTheme.headlineSmall,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SeeMoreBlog extends StatelessWidget {
-  const SeeMoreBlog({
-    super.key,
-    required this.bodyMargin,
-    required this.textTheme,
-  });
-
-  final double bodyMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: bodyMargin, bottom: 8),
-      child: Row(
-        children: [
-          ImageIcon(
-            Assets.icons.bluepen.provider(),
-            color: solidColors.seeMore,
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Text(
-            MyStrings.viewHotestBlog,
             style: textTheme.headlineSmall,
           ),
         ],

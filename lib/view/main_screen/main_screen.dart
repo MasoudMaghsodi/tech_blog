@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:tech_blog/component/dimens.dart';
 import 'package:tech_blog/component/my_component.dart';
-import 'package:tech_blog/component/my_strings.dart';
+import 'package:tech_blog/constant/my_strings.dart';
 import 'package:tech_blog/controller/register_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/component/my_colors.dart';
+import 'package:tech_blog/constant/my_colors.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
 
@@ -20,8 +21,6 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
-    double bodyMargin = size.width / 10;
 
     return SafeArea(
       child: Scaffold(
@@ -29,7 +28,8 @@ class MainScreen extends StatelessWidget {
         drawer: Drawer(
           backgroundColor: solidColors.statusBarColor,
           child: Padding(
-            padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
+            padding: EdgeInsets.only(
+                right: Dimens.bodyMargin, left: Dimens.bodyMargin),
             child: ListView(
               children: [
                 DrawerHeader(
@@ -104,7 +104,7 @@ class MainScreen extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              Assets.images.splash.image(height: size.height / 13.6),
+              Assets.images.splash.image(height: Get.height / 13.6),
               const Icon(
                 Icons.search,
                 color: Colors.black,
@@ -121,20 +121,20 @@ class MainScreen extends StatelessWidget {
                   index: selectedPageIndex.value,
                   children: [
                     HomeScreen(
-                        size: size,
+                        size: Get.size,
                         textTheme: textTheme,
-                        bodyMargin: bodyMargin),
+                        bodyMargin: Dimens.bodyMargin),
                     ProfileScreen(
-                        size: size,
+                        size: Get.size,
                         textTheme: textTheme,
-                        bodyMargin: bodyMargin),
+                        bodyMargin: Dimens.bodyMargin),
                   ],
                 ),
               )),
             ),
             BottomNavigation(
-              size: size,
-              bodyMargin: bodyMargin,
+              size: Get.size,
+              bodyMargin: Dimens.bodyMargin,
               changeScreen: (int value) {
                 selectedPageIndex.value = value;
               },
