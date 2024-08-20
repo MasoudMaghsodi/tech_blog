@@ -10,6 +10,7 @@ import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/controller/article/list_article_controller.dart';
 import 'package:tech_blog/controller/article/manage_article_controller.dart';
 import 'package:tech_blog/services/pick_file.dart';
+import 'package:tech_blog/view/articles/article_content_editor.dart';
 import 'package:tech_blog/view/articles/article_list_screen.dart';
 import '../../controller/file_controller.dart';
 import '../../gen/assets.gen.dart';
@@ -172,10 +173,13 @@ class SingleManageArticle extends StatelessWidget {
                     style: textTheme.headlineLarge,
                   ),
                 ),
-                SeeMoreBlog(
-                  bodyMargin: Dimens.halfBodyMargin,
-                  textTheme: textTheme,
-                  title: "ویرایش متن اصلی مقاله",
+                GestureDetector(
+                  onTap: () => Get.to(() => ArticleContentEditor()),
+                  child: SeeMoreBlog(
+                    bodyMargin: Dimens.halfBodyMargin,
+                    textTheme: textTheme,
+                    title: "ویرایش متن اصلی مقاله",
+                  ),
                 ),
 
                 Padding(
