@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -7,12 +6,10 @@ import 'package:get/get.dart';
 import 'package:tech_blog/component/dimens.dart';
 import 'package:tech_blog/constant/my_colors.dart';
 import 'package:tech_blog/component/my_component.dart';
-import 'package:tech_blog/controller/article/list_article_controller.dart';
 import 'package:tech_blog/controller/article/manage_article_controller.dart';
 import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:tech_blog/services/pick_file.dart';
 import 'package:tech_blog/view/articles/article_content_editor.dart';
-import 'package:tech_blog/view/articles/article_list_screen.dart';
 import '../../controller/file_controller.dart';
 import '../../gen/assets.gen.dart';
 
@@ -215,6 +212,18 @@ class SingleManageArticle extends StatelessWidget {
                     style: textTheme.headlineLarge,
                   ),
                 ),
+                ElevatedButton(
+                  onPressed: () async =>
+                      await manageArticleCotroller.storeArticle(),
+                  child: Text(
+                    manageArticleCotroller.loading.value
+                        ? "صبر کنید ..."
+                        : 'ارسال مطلب',
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                )
                 // tags(textTheme),
               ],
             ),
@@ -253,7 +262,7 @@ class SingleManageArticle extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
+                      Expanded(
                         child: Text(
                           homeScreenController.tagList[index].title!,
                           style: textTheme.displayMedium,
