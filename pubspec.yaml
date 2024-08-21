@@ -64,6 +64,7 @@ dev_dependencies:
   # rules and activating additional ones.
   build_runner: 
   flutter_gen_runner:
+  flutter_lints: ^4.0.0
 
 flutter_gen:
   integrations:

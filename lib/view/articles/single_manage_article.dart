@@ -9,6 +9,7 @@ import 'package:tech_blog/constant/my_colors.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/controller/article/list_article_controller.dart';
 import 'package:tech_blog/controller/article/manage_article_controller.dart';
+import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:tech_blog/services/pick_file.dart';
 import 'package:tech_blog/view/articles/article_content_editor.dart';
 import 'package:tech_blog/view/articles/article_list_screen.dart';
@@ -192,10 +193,27 @@ class SingleManageArticle extends StatelessWidget {
                         const Loading(),
                   ),
                 ),
-                SeeMoreBlog(
-                  bodyMargin: Dimens.halfBodyMargin,
-                  textTheme: textTheme,
-                  title: "انتخاب دسته بندی",
+                GestureDetector(
+                  onTap: () {
+                    chooseCatsBottomSheet(textTheme);
+                  },
+                  child: SeeMoreBlog(
+                    bodyMargin: Dimens.halfBodyMargin,
+                    textTheme: textTheme,
+                    title: "انتخاب دسته بندی",
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(Dimens.halfBodyMargin),
+                  child: Text(
+                    manageArticleCotroller.articleInfoModel.value.catName ==
+                            null
+                        ? "هیچ دسته بندی انتخاب نشده "
+                        : manageArticleCotroller
+                            .articleInfoModel.value.catName!,
+                    maxLines: 2,
+                    style: textTheme.headlineLarge,
+                  ),
                 ),
                 // tags(textTheme),
               ],
@@ -206,23 +224,21 @@ class SingleManageArticle extends StatelessWidget {
     );
   }
 
-  Widget tags(textTheme) {
+  Widget cats(textTheme) {
+    var homeScreenController = Get.find<HomeScreenController>();
     return SizedBox(
-      height: 50,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: manageArticleCotroller.tagList.length,
+      height: Get.height / 1.7,
+      child: GridView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: homeScreenController.tagList.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () async {
-              var tagId = manageArticleCotroller.tagList[index].id!;
-              String tagName = manageArticleCotroller.tagList[index].title!;
-              await Get.find<ListArticleController>()
-                  .getArticleListWithTagsId(tagId);
-
-              Get.to(ArticleListScreen(
-                title: tagName,
-              ));
+              manageArticleCotroller.articleInfoModel.update((val) {
+                val?.catId = homeScreenController.tagList[index].id!;
+                val?.catName = homeScreenController.tagList[index].title!;
+              });
+              Get.back();
             },
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 8, 15, 8),
@@ -230,18 +246,18 @@ class SingleManageArticle extends StatelessWidget {
                 height: 30,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
-                  color: Colors.grey,
+                  color: solidColors.primeryColor,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        manageArticleCotroller.tagList[index].title!,
-                        style: textTheme.displayMedium,
+                      Center(
+                        child: Text(
+                          homeScreenController.tagList[index].title!,
+                          style: textTheme.displayMedium,
+                        ),
                       ),
                     ],
                   ),
@@ -250,7 +266,41 @@ class SingleManageArticle extends StatelessWidget {
             ),
           );
         },
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
+        ),
       ),
+    );
+  }
+
+  chooseCatsBottomSheet(TextTheme textTheme) {
+    Get.bottomSheet(
+      Container(
+        height: Get.height / 1.5,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              const Text('انتخاب دسته بندی'),
+              const SizedBox(
+                height: 8,
+              ),
+              cats(textTheme),
+            ],
+          ),
+        ),
+      ),
+      isScrollControlled: true,
+      persistent: true,
     );
   }
 }
