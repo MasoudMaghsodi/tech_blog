@@ -12,7 +12,7 @@ import 'package:tech_blog/view/articles/single_manage_article.dart';
 import 'package:tech_blog/view/main_screen/main_screen.dart';
 import 'package:tech_blog/view/articles/single.dart';
 import 'package:tech_blog/view/podcast/single_podcast.dart';
-// import 'package:tech_blog/view/splash_screen.dart';
+import 'package:tech_blog/view/splash_screen.dart';
 
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
@@ -60,16 +60,22 @@ class MyApp extends StatelessWidget {
           page: () => SingleManageArticle(),
           binding: ArticleManagerBinding(),
         ),
+        GetPage(
+          name: NamedRoute.singlePodcast,
+          page: () => SinglePodcast(),
+        ),
       ],
-      // home: const SplashScreen(),
-      home: const SinglePodcast(),
+      home: const SplashScreen(),
     );
   }
 }
 
 class NamedRoute {
+  NamedRoute._();
+
   static String routeMainScreen = '/MainScreen';
   static String routeSingleArticle = '/SingleArticle';
   static String manageArticle = '/ManageArticle';
   static String singleManageArticle = '/SingleManageArticle';
+  static String singlePodcast = '/SinglePodcast';
 }

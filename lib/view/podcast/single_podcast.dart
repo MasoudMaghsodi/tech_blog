@@ -4,13 +4,22 @@ import 'package:get/get.dart';
 import 'package:tech_blog/component/decorations.dart';
 import 'package:tech_blog/component/dimens.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:tech_blog/controller/podcast/single_podcast_controller.dart';
+import 'package:tech_blog/models/podcast_model.dart';
 
 import '../../component/my_component.dart';
 import '../../constant/my_colors.dart';
 import '../../gen/assets.gen.dart';
 
+// ignore: must_be_immutable
 class SinglePodcast extends StatelessWidget {
-  const SinglePodcast({super.key});
+  late SinglePodcastController singlePodcastController;
+  late PodcastModel podcastModel;
+  SinglePodcast({super.key}) {
+    podcastModel = Get.arguments;
+    singlePodcastController =
+        Get.put(SinglePodcastController(id: podcastModel.id));
+  }
 
   @override
   Widget build(BuildContext context) {
