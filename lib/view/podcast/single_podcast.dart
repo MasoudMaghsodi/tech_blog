@@ -134,36 +134,50 @@ class SinglePodcast extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: controller.podcastFileList.length,
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      ImageIcon(
-                                        Image.asset(Assets.icons.bluemic.path)
-                                            .image,
-                                        color: solidColors.seeMore,
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      SizedBox(
-                                        width: Get.width / 1.5,
-                                        child: Text(
-                                          controller
-                                              .podcastFileList[index].title!,
-                                          style: textTheme.headlineLarge,
+                            return GestureDetector(
+                              onTap: () async {
+                                await controller.player
+                                    .seek(Duration.zero, index: index);
+                                controller.currentFileIndex.value =
+                                    controller.player.currentIndex!;
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        ImageIcon(
+                                          Image.asset(Assets.icons.bluemic.path)
+                                              .image,
+                                          color: solidColors.seeMore,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    "${controller.podcastFileList[index].length!}:00",
-                                  ),
-                                ],
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        SizedBox(
+                                          width: Get.width / 1.5,
+                                          child: Obx(
+                                            () => Text(
+                                              controller.podcastFileList[index]
+                                                  .title!,
+                                              style: controller.currentFileIndex
+                                                          .value ==
+                                                      index
+                                                  ? textTheme.headlineSmall
+                                                  : textTheme.headlineLarge,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      "${controller.podcastFileList[index].length!}:00",
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           },
@@ -197,6 +211,8 @@ class SinglePodcast extends StatelessWidget {
                           GestureDetector(
                             onTap: () async {
                               await controller.player.seekToNext();
+                              controller.currentFileIndex.value =
+                                  controller.player.currentIndex!;
                             },
                             child: const Icon(
                               Icons.skip_next,
@@ -210,6 +226,8 @@ class SinglePodcast extends StatelessWidget {
                                   : controller.player.play();
                               controller.playState.value =
                                   controller.player.playing;
+                              controller.currentFileIndex.value =
+                                  controller.player.currentIndex!;
                             },
                             child: Obx(
                               () => Icon(
@@ -224,6 +242,8 @@ class SinglePodcast extends StatelessWidget {
                           GestureDetector(
                             onTap: () async {
                               await controller.player.seekToPrevious();
+                              controller.currentFileIndex.value =
+                                  controller.player.currentIndex!;
                             },
                             child: const Icon(
                               Icons.skip_previous,
