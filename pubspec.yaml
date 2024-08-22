@@ -51,6 +51,7 @@ dependencies:
   file_picker: ^8.0.7
   html_editor_enhanced: ^2.6.0
   percent_indicator: ^4.2.3
+  just_audio: ^0.9.37
 
 
 
