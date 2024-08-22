@@ -11,7 +11,8 @@ import 'package:tech_blog/view/articles/manage_article.dart';
 import 'package:tech_blog/view/articles/single_manage_article.dart';
 import 'package:tech_blog/view/main_screen/main_screen.dart';
 import 'package:tech_blog/view/articles/single.dart';
-import 'package:tech_blog/view/splash_screen.dart';
+import 'package:tech_blog/view/podcast/single_podcast.dart';
+// import 'package:tech_blog/view/splash_screen.dart';
 
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
@@ -60,7 +61,8 @@ class MyApp extends StatelessWidget {
           binding: ArticleManagerBinding(),
         ),
       ],
-      home: const SplashScreen(),
+      // home: const SplashScreen(),
+      home: const SinglePodcast(),
     );
   }
 }

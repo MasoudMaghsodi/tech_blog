@@ -43,7 +43,6 @@ class ManageArticleController extends GetxController {
       });
       loading.value = false;
     }
-    articleList.clear();
   }
 
   updateTitle() {
