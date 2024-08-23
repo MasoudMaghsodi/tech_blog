@@ -1,9 +1,9 @@
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/component/decorations.dart';
 import 'package:tech_blog/component/dimens.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:tech_blog/controller/podcast/single_podcast_controller.dart';
 import 'package:tech_blog/models/podcast_model.dart';
 
@@ -27,6 +27,7 @@ class SinglePodcast extends StatelessWidget {
       child: Scaffold(
         body: Stack(
           children: [
+            // title
             Positioned(
               top: 0,
               left: 0,
@@ -140,6 +141,7 @@ class SinglePodcast extends StatelessWidget {
                                     .seek(Duration.zero, index: index);
                                 controller.currentFileIndex.value =
                                     controller.player.currentIndex!;
+                                controller.timerCheck();
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -188,6 +190,7 @@ class SinglePodcast extends StatelessWidget {
                 ),
               ),
             ),
+            // player manager
             Positioned(
               bottom: 8,
               right: Dimens.bodyMargin,
@@ -200,10 +203,30 @@ class SinglePodcast extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      LinearPercentIndicator(
-                        percent: 0.7,
-                        backgroundColor: Colors.white,
-                        progressColor: Colors.orange,
+                      Obx(
+                        () => ProgressBar(
+                          bufferedBarColor: Colors.lightBlue.shade200,
+                          timeLabelTextStyle:
+                              TextStyle(color: Colors.blueAccent.shade700),
+                          progressBarColor: Colors.amber,
+                          thumbColor: Colors.amberAccent,
+                          baseBarColor: Colors.white,
+                          progress: controller.progressValue.value,
+                          total: controller.player.duration ??
+                              const Duration(seconds: 0),
+                          buffered: controller.bufferedValue.value,
+                          onSeek: (position) async {
+                            controller.player.seek(position);
+                            if (controller.player.playing) {
+                              controller.startProgress();
+                            } else if (position <= const Duration(seconds: 0)) {
+                              await controller.player.seekToNext();
+                              controller.currentFileIndex.value =
+                                  controller.player.currentIndex!;
+                              controller.timerCheck();
+                            }
+                          },
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -213,6 +236,7 @@ class SinglePodcast extends StatelessWidget {
                               await controller.player.seekToNext();
                               controller.currentFileIndex.value =
                                   controller.player.currentIndex!;
+                              controller.timerCheck();
                             },
                             child: const Icon(
                               Icons.skip_next,
@@ -222,21 +246,24 @@ class SinglePodcast extends StatelessWidget {
                           GestureDetector(
                             onTap: () {
                               controller.player.playing
+                                  ? controller.timer!.cancel()
+                                  : controller.startProgress();
+
+                              controller.player.playing
                                   ? controller.player.pause()
                                   : controller.player.play();
+
                               controller.playState.value =
                                   controller.player.playing;
                               controller.currentFileIndex.value =
                                   controller.player.currentIndex!;
                             },
-                            child: Obx(
-                              () => Icon(
-                                controller.player.playing
-                                    ? Icons.pause_circle_filled
-                                    : Icons.play_circle_filled,
-                                color: Colors.white,
-                                size: 48,
-                              ),
+                            child: Icon(
+                              controller.player.playing
+                                  ? Icons.pause_circle_filled
+                                  : Icons.play_circle_filled,
+                              color: Colors.white,
+                              size: 48,
                             ),
                           ),
                           GestureDetector(
@@ -244,6 +271,7 @@ class SinglePodcast extends StatelessWidget {
                               await controller.player.seekToPrevious();
                               controller.currentFileIndex.value =
                                   controller.player.currentIndex!;
+                              controller.timerCheck();
                             },
                             child: const Icon(
                               Icons.skip_previous,
@@ -251,9 +279,18 @@ class SinglePodcast extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(),
-                          const Icon(
-                            Icons.repeat,
-                            color: Colors.white,
+                          Obx(
+                            () => GestureDetector(
+                              onTap: () {
+                                controller.setLoop();
+                              },
+                              child: Icon(
+                                Icons.repeat,
+                                color: controller.isLoopAll.value
+                                    ? Colors.blue
+                                    : Colors.white,
+                              ),
+                            ),
                           ),
                         ],
                       ),

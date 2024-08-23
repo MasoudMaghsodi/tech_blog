@@ -1,4 +1,5 @@
 class ApiConstant {
+  ApiConstant._();
   static const hostDlUrl = "https://techblog.sasansafari.com";
   static const baseUrl = "https://techblog.sasansafari.com/Techblog/api/";
   static const getHomeItems = "${baseUrl}home/?command=index";
@@ -15,6 +16,7 @@ class ApiConstant {
 }
 
 class ApiArticleKeyConstant {
+  ApiArticleKeyConstant._();
   static const title = "title";
   static const content = "content";
   static const catId = "cat_id";

@@ -8,7 +8,6 @@ import 'package:tech_blog/constant/storage_const.dart';
 class DioService {
   Dio dio = Dio();
   Future<dynamic> getMethod(String url) async {
-    dio.options.headers['content-Type'] = 'application/json';
     return await dio
         .get(url,
             options: Options(responseType: ResponseType.json, method: 'GET'))

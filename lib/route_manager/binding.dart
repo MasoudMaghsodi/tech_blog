@@ -7,8 +7,6 @@ import 'package:tech_blog/controller/article/single_article_controller.dart';
 class ArticleBinding implements Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
-
     Get.put(() => ListArticleController());
     Get.lazyPut(() => SingleArticleController());
   }
@@ -17,8 +15,6 @@ class ArticleBinding implements Bindings {
 class ArticleManagerBinding implements Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
-
     Get.lazyPut(() => ManageArticleController());
   }
 }
@@ -26,8 +22,6 @@ class ArticleManagerBinding implements Bindings {
 class RegisterBinding implements Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
-
     Get.put(RegisterController());
   }
 }

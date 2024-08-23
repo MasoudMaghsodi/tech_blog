@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tech_blog/constant/api_constant.dart';
 import 'package:tech_blog/constant/storage_const.dart';
-import 'package:tech_blog/main.dart';
+import 'package:tech_blog/route_manager/names.dart';
 import 'package:tech_blog/services/dio_service.dart';
 import 'package:tech_blog/view/main_screen/main_screen.dart';
 import 'package:tech_blog/view/register/register_intro.dart';

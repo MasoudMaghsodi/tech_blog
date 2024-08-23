@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/controller/article/list_article_controller.dart';
-import 'package:tech_blog/main.dart';
+import 'package:tech_blog/route_manager/names.dart';
 import '../../controller/article/single_article_controller.dart';
 
 // ignore: must_be_immutable

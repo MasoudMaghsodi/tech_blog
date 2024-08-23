@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:tech_blog/controller/article/single_article_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/main.dart';
 import 'package:tech_blog/models/fake_data.dart';
 import 'package:tech_blog/constant/my_colors.dart';
 import 'package:tech_blog/component/my_component.dart';
 import 'package:tech_blog/constant/my_strings.dart';
+import 'package:tech_blog/route_manager/names.dart';
 import 'package:tech_blog/view/articles/article_list_screen.dart';
 
 import '../../controller/article/list_article_controller.dart';
