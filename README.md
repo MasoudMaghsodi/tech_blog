@@ -1,5 +1,10 @@
 ---
 
+![logo](https://github.com/user-attachments/assets/0e76743b-ff8a-47d5-940a-ad0560ba7f02)   ![techBlog](https://github.com/user-attachments/assets/cb328b9f-3c4b-43b9-b235-35d3f2290dd5)
+
+
+
+
 # Tech Blog
 
 A Flutter-based tech blog application that uses GetX for state management and follows the MVC architecture pattern. The app allows users to browse and publish the latest news and podcasts in the world of technology and programming. Users can also create and share their own articles and podcasts.
