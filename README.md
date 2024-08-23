@@ -1,6 +1,7 @@
 # tech_blog
 
-A new Flutter project.
+TechBlog is an Application for Developers
+In TechBlog We Send And Get News About Technologies
 
 ## Getting Started
 
