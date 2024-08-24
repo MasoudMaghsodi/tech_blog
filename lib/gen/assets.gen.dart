@@ -8,22 +8,22 @@
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vector_graphics/vector_graphics.dart';
+import 'package:flutter/services.dart';
 
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
-  /// File path: assets/icons/bluemic.png
-  AssetGenImage get bluemic => const AssetGenImage('assets/icons/bluemic.png');
+  /// File path: assets/icons/audiofile.png
+  AssetGenImage get audiofile =>
+      const AssetGenImage('assets/icons/audiofile.png');
 
-  /// File path: assets/icons/bluepen.png
-  AssetGenImage get bluepen => const AssetGenImage('assets/icons/bluepen.png');
+  /// File path: assets/icons/blue_pen.png
+  AssetGenImage get bluePen => const AssetGenImage('assets/icons/blue_pen.png');
 
-  /// File path: assets/icons/downCatArrow.png
+  /// File path: assets/icons/down_cat_arrow.png
   AssetGenImage get downCatArrow =>
-      const AssetGenImage('assets/icons/downCatArrow.png');
+      const AssetGenImage('assets/icons/down_cat_arrow.png');
 
   /// File path: assets/icons/hashtagicon.png
   AssetGenImage get hashtagicon =>
@@ -32,64 +32,77 @@ class $AssetsIconsGen {
   /// File path: assets/icons/home.png
   AssetGenImage get home => const AssetGenImage('assets/icons/home.png');
 
+  /// File path: assets/icons/microphon.png
+  AssetGenImage get microphon =>
+      const AssetGenImage('assets/icons/microphon.png');
+
   /// File path: assets/icons/user.png
   AssetGenImage get user => const AssetGenImage('assets/icons/user.png');
 
-  /// File path: assets/icons/w.png
-  AssetGenImage get w => const AssetGenImage('assets/icons/w.png');
+  /// File path: assets/icons/write.png
+  AssetGenImage get write => const AssetGenImage('assets/icons/write.png');
+
+  /// File path: assets/icons/write_article.png
+  AssetGenImage get writeArticle =>
+      const AssetGenImage('assets/icons/write_article.png');
+
+  /// File path: assets/icons/write_article_icon.png
+  AssetGenImage get writeArticleIcon =>
+      const AssetGenImage('assets/icons/write_article_icon.png');
+
+  /// File path: assets/icons/write_microphone.png
+  AssetGenImage get writeMicrophone =>
+      const AssetGenImage('assets/icons/write_microphone.png');
+
+  /// File path: assets/icons/write_podcast_icon.png
+  AssetGenImage get writePodcastIcon =>
+      const AssetGenImage('assets/icons/write_podcast_icon.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [bluemic, bluepen, downCatArrow, hashtagicon, home, user, w];
+  List<AssetGenImage> get values => [
+        audiofile,
+        bluePen,
+        downCatArrow,
+        hashtagicon,
+        home,
+        microphon,
+        user,
+        write,
+        writeArticle,
+        writeArticleIcon,
+        writeMicrophone,
+        writePodcastIcon
+      ];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/avatar.png
-  AssetGenImage get avatar => const AssetGenImage('assets/images/avatar.png');
+  /// File path: assets/images/empty_state.png
+  AssetGenImage get emptyState =>
+      const AssetGenImage('assets/images/empty_state.png');
+
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
   /// File path: assets/images/poster_test.png
   AssetGenImage get posterTest =>
       const AssetGenImage('assets/images/poster_test.png');
 
+  /// File path: assets/images/profileAvatar.png
+  AssetGenImage get profileAvatar =>
+      const AssetGenImage('assets/images/profileAvatar.png');
+
   /// File path: assets/images/single_place_holder.jpg
   AssetGenImage get singlePlaceHolder =>
       const AssetGenImage('assets/images/single_place_holder.jpg');
 
-  /// File path: assets/images/splash.png
-  AssetGenImage get splash => const AssetGenImage('assets/images/splash.png');
-
-  /// File path: assets/images/tcbot_empty.png
-  AssetGenImage get tcbotEmpty =>
-      const AssetGenImage('assets/images/tcbot_empty.png');
-
-  /// File path: assets/images/techbot.svg
-  SvgGenImage get techbot => const SvgGenImage('assets/images/techbot.svg');
-
-  /// File path: assets/images/test.jpg
-  AssetGenImage get test => const AssetGenImage('assets/images/test.jpg');
-
-  /// File path: assets/images/write_article.png
-  AssetGenImage get writeArticle =>
-      const AssetGenImage('assets/images/write_article.png');
-
-  /// File path: assets/images/write_podcast.png
-  AssetGenImage get writePodcast =>
-      const AssetGenImage('assets/images/write_podcast.png');
+  /// File path: assets/images/tcbot.svg
+  SvgGenImage get tcbot => const SvgGenImage('assets/images/tcbot.svg');
 
   /// List of all assets
-  List<dynamic> get values => [
-        avatar,
-        posterTest,
-        singlePlaceHolder,
-        splash,
-        tcbotEmpty,
-        techbot,
-        test,
-        writeArticle,
-        writePodcast
-      ];
+  List<dynamic> get values =>
+      [emptyState, logo, posterTest, profileAvatar, singlePlaceHolder, tcbot];
 }
 
 class Assets {
@@ -100,16 +113,9 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  });
+  const AssetGenImage(this._assetName);
 
   final String _assetName;
-
-  final Size? size;
-  final Set<String> flavors;
 
   Image image({
     Key? key,
@@ -164,16 +170,7 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({
-    AssetBundle? bundle,
-    String? package,
-  }) {
-    return AssetImage(
-      _assetName,
-      bundle: bundle,
-      package: package,
-    );
-  }
+  ImageProvider provider() => AssetImage(_assetName);
 
   String get path => _assetName;
 
@@ -181,22 +178,9 @@ class AssetGenImage {
 }
 
 class SvgGenImage {
-  const SvgGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = false;
-
-  const SvgGenImage.vec(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = true;
+  const SvgGenImage(this._assetName);
 
   final String _assetName;
-  final Size? size;
-  final Set<String> flavors;
-  final bool _isVecFormat;
 
   SvgPicture svg({
     Key? key,
@@ -211,32 +195,19 @@ class SvgGenImage {
     WidgetBuilder? placeholderBuilder,
     String? semanticsLabel,
     bool excludeFromSemantics = false,
-    SvgTheme? theme,
+    SvgTheme theme = const SvgTheme(),
     ColorFilter? colorFilter,
-    Clip clipBehavior = Clip.hardEdge,
     @deprecated Color? color,
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated Clip? clipBehavior,
     @deprecated bool cacheColorFilter = false,
   }) {
-    final BytesLoader loader;
-    if (_isVecFormat) {
-      loader = AssetBytesLoader(
-        _assetName,
-        assetBundle: bundle,
-        packageName: package,
-      );
-    } else {
-      loader = SvgAssetLoader(
-        _assetName,
-        assetBundle: bundle,
-        packageName: package,
-        theme: theme,
-      );
-    }
-    return SvgPicture(
-      loader,
+    return SvgPicture.asset(
+      _assetName,
       key: key,
       matchTextDirection: matchTextDirection,
+      bundle: bundle,
+      package: package,
       width: width,
       height: height,
       fit: fit,
@@ -245,9 +216,11 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      colorFilter: colorFilter ??
-          (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
-      clipBehavior: clipBehavior,
+      theme: theme,
+ 
+      color: color,
+      colorBlendMode: colorBlendMode,
+      
       cacheColorFilter: cacheColorFilter,
     );
   }

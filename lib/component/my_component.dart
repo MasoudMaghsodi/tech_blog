@@ -1,24 +1,26 @@
 import 'dart:developer';
-import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:tec/constant/my_colors.dart';
 import 'package:get/get.dart';
-import 'package:tech_blog/controller/home_screen_controller.dart';
-import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/constant/my_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:tec/gen/assets.gen.dart';
+import 'package:tec/component/text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:tec/controller/home_screen_controller.dart';
 
 class TechDivider extends StatelessWidget {
   const TechDivider({
-    super.key,
+    Key? key,
     required this.size,
-  });
+  }) : super(key: key);
 
   final Size size;
 
   @override
   Widget build(BuildContext context) {
     return Divider(
-      color: solidColors.divider,
+      thickness: 1.5,
+      color: SolidColors.dividerColor,
       indent: size.width / 6,
       endIndent: size.width / 6,
     );
@@ -26,28 +28,32 @@ class TechDivider extends StatelessWidget {
 }
 
 class MainTags extends StatelessWidget {
-  const MainTags({super.key, required this.textTheme, required this.index});
+  const MainTags({
+    Key? key,
+    required this.textTheme,
+    required this.index,
+  }) : super(key: key);
 
   final TextTheme textTheme;
-  final dynamic index;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        gradient: const LinearGradient(
-            colors: gradiantColors.tags,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(24)),
+        gradient: LinearGradient(
+            colors: GradientColors.tags,
             begin: Alignment.centerRight,
-            end: Alignment.bottomLeft),
+            end: Alignment.centerLeft),
       ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
         child: Row(
           children: [
             ImageIcon(
-              Assets.icons.hashtagicon.provider(),
+              Image.asset(Assets.icons.hashtagicon.path).image,
               color: Colors.white,
               size: 16,
             ),
@@ -55,12 +61,35 @@ class MainTags extends StatelessWidget {
               width: 8,
             ),
             Text(
-              Get.find<HomeScreenController>().tagList[index].title!,
+              Get.find<HomeScreenController>().tagsList[index].title!,
               style: textTheme.displayMedium,
-            ),
+            )
           ],
         ),
       ),
+    );
+  }
+}
+
+myLaunchUrl(String url) async {
+  var uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri);
+  } else {
+    log("could not launch ${uri.toString()}");
+  }
+}
+
+class Loading extends StatelessWidget {
+  const Loading({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SpinKitFadingCube(
+      color: SolidColors.primaryColor,
+      size: 32.0,
     );
   }
 }
@@ -75,16 +104,12 @@ PreferredSize appBar(String title) {
         elevation: 0,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: Text(
+            padding: const EdgeInsets.only(left: 16),
+            child: Center(
+                child: Text(
               title,
-              style: const TextStyle(
-                fontFamily: 'dana',
-                fontSize: 16,
-                color: solidColors.primeryColor,
-                fontWeight: FontWeight.w300,
-              ),
-            ),
+              style: appBarTextStyle,
+            )),
           ),
         ],
         leading: GestureDetector(
@@ -92,18 +117,15 @@ PreferredSize appBar(String title) {
             Get.back();
           },
           child: Padding(
-            padding: const EdgeInsets.only(right: 16.0),
+            padding: const EdgeInsets.only(right: 16),
             child: Container(
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                color: solidColors.primeryColor.withBlue(100),
+                color: SolidColors.primaryColor.withBlue(100),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
-                Icons.keyboard_arrow_right_rounded,
-                color: Colors.white,
-              ),
+              child: const Icon(Icons.keyboard_arrow_right_rounded),
             ),
           ),
         ),
@@ -112,36 +134,13 @@ PreferredSize appBar(String title) {
   );
 }
 
-myLaunchUri(String url) async {
-  var uri = Uri.parse(url);
-  if (await canLaunchUrl(uri)) {
-    await launchUrl(uri);
-  } else {
-    log("could not launch $url");
-  }
-}
-
-class Loading extends StatelessWidget {
-  const Loading({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const SpinKitFadingCube(
-      color: solidColors.primeryColor,
-      size: 32,
-    );
-  }
-}
-
 class SeeMoreBlog extends StatelessWidget {
   const SeeMoreBlog({
-    super.key,
+    Key? key,
     required this.bodyMargin,
     required this.textTheme,
     required this.title,
-  });
+  }) : super(key: key);
 
   final double bodyMargin;
   final TextTheme textTheme;
@@ -154,16 +153,16 @@ class SeeMoreBlog extends StatelessWidget {
       child: Row(
         children: [
           ImageIcon(
-            Assets.icons.bluepen.provider(),
-            color: solidColors.seeMore,
+            Image.asset(Assets.icons.bluePen.path).image,
+            color: SolidColors.seeMore,
           ),
           const SizedBox(
             width: 8,
           ),
           Text(
             title,
-            style: textTheme.headlineSmall,
-          ),
+            style: textTheme.displaySmall,
+          )
         ],
       ),
     );

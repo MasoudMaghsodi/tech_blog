@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/constant/my_colors.dart';
-import 'package:tech_blog/route_manager/names.dart';
+import 'package:tec/component/dimens.dart';
+import 'package:tec/gen/assets.gen.dart';
+import 'package:tec/constant/my_colors.dart';
+import 'package:tec/route_manager/names.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -16,7 +17,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      // ignore: use_build_context_synchronously
       Get.offAndToNamed(NamedRoute.routeMainScreen);
     });
     super.initState();
@@ -27,19 +27,16 @@ class _SplashScreenState extends State<SplashScreen> {
     return SafeArea(
       child: Scaffold(
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Assets.images.splash.image(),
-              const Padding(
-                padding: EdgeInsets.only(top: 32.0),
-                child: SpinKitFadingCube(
-                  color: solidColors.primeryColor,
-                  size: 32.0,
-                ),
-              ),
-            ],
-          ),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Image.asset(Assets.images.logo.path, height: Dimens.xlarge),
+            SizedBox(
+              height: Dimens.large,
+            ),
+            SpinKitFadingCube(
+              color: SolidColors.primaryColor,
+              size: Dimens.large,
+            )
+          ]),
         ),
       ),
     );

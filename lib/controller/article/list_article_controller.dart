@@ -1,8 +1,7 @@
-import 'package:get/state_manager.dart';
-import 'package:tech_blog/models/article_model.dart';
-
-import '../../constant/api_constant.dart';
-import '../../services/dio_service.dart';
+import 'package:get/get.dart';
+import 'package:tec/constant/api_constant.dart';
+import 'package:tec/models/article_model.dart';
+import 'package:tec/services/dio_service.dart';
 
 class ListArticleController extends GetxController {
   RxList<ArticleModel> articleList = RxList();
@@ -16,13 +15,13 @@ class ListArticleController extends GetxController {
 
   getList() async {
     loading.value = true;
-    var response = await DioService().getMethod(ApiConstant.getArticleList);
+
+    var response = await DioService().getMethod(ApiUrlConstant.getArticleList);
 
     if (response.statusCode == 200) {
       response.data.forEach((element) {
         articleList.add(ArticleModel.fromJson(element));
       });
-
       loading.value = false;
     }
   }
@@ -30,19 +29,22 @@ class ListArticleController extends GetxController {
   getArticleListWithTagsId(String id) async {
     articleList.clear();
     loading.value = true;
+
     final queryParam = {
       'command': 'get_articles_with_tag_id',
       'tag_id': id,
-      'user_id': '',
+      'user_id': ''
     };
-    final uri = Uri.https(ApiConstant.baseUrl, 'article/get.php?', queryParam);
+
+    final uri =
+        Uri.https(ApiUrlConstant.baseUrl, 'article/get.php?', queryParam);
+
     var response = await DioService().getMethod(uri.toString());
 
     if (response.statusCode == 200) {
       response.data.forEach((element) {
         articleList.add(ArticleModel.fromJson(element));
       });
-
       loading.value = false;
     }
   }

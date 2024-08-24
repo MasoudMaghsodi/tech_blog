@@ -1,10 +1,12 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:tech_blog/models/article_model.dart';
-import 'package:tech_blog/models/tags_model.dart';
-import 'package:tech_blog/view/articles/single.dart';
-import '../../constant/api_constant.dart';
-import '../../models/article_info_model.dart';
-import '../../services/dio_service.dart';
+import 'package:tec/constant/api_constant.dart';
+import 'package:tec/models/article_info_model.dart';
+import 'package:tec/models/article_model.dart';
+import 'package:tec/models/tags_model.dart';
+import 'package:tec/services/dio_service.dart';
+
+import '../../route_manager/names.dart';
 
 class SingleArticleController extends GetxController {
   RxBool loading = false.obs;
@@ -14,33 +16,29 @@ class SingleArticleController extends GetxController {
   RxList<TagsModel> tagList = RxList();
   RxList<ArticleModel> relatedList = RxList();
 
-  @override
-  onInit() {
-    super.onInit();
-    getArticleInfo(id);
-  }
-
   getArticleInfo(var id) async {
     articleInfoModel = ArticleInfoModel(null, null, null).obs;
+
+    Get.toNamed(NamedRoute.routeSingleArticle);
+
     loading.value = true;
-    //TODO user id is hard code
     var userId = '';
     var response = await DioService().getMethod(
-        '${ApiConstant.baseUrl}article/get.php?command=info&id=$id&user_id=$userId');
+        '${ApiUrlConstant.baseUrl}article/get.php?command=info&id=$id&user_id=$userId');
 
     if (response.statusCode == 200) {
       articleInfoModel.value = ArticleInfoModel.fromJson(response.data);
       loading.value = false;
     }
+
     tagList.clear();
     response.data['tags'].forEach((element) {
       tagList.add(TagsModel.fromJson(element));
     });
+
     relatedList.clear();
     response.data['related'].forEach((element) {
       relatedList.add(ArticleModel.fromJson(element));
     });
-
-    Get.to(Single());
   }
 }

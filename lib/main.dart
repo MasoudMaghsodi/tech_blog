@@ -3,39 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:tech_blog/constant/my_colors.dart';
-import 'package:tech_blog/component/text_style.dart';
-import 'package:tech_blog/my_http_overrides.dart';
-import 'package:tech_blog/route_manager/names.dart';
-import 'package:tech_blog/route_manager/pages.dart';
+import 'package:tec/constant/my_colors.dart';
+import 'package:tec/themes/app_themes.dart';
+import 'my_http_overrides.dart';
+import 'route_manager/names.dart';
+import 'route_manager/pages.dart';
 
-void main() async {
+Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: solidColors.statusBarColor,
-      statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: solidColors.systemNavigationBarColor,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    ),
-  );
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: SolidColors.statusBarColor,
+    statusBarIconBrightness: Brightness.dark,
+    systemNavigationBarColor: SolidColors.systemNavigationBarColor,
+    systemNavigationBarIconBrightness: Brightness.dark,
+  ));
   await GetStorage.init();
-  runApp(
-    const MyApp(),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: NamedRoute.initialRoute,
       locale: const Locale('fa'),
-      theme: lightTheme(),
+      theme: AppThemes.lightTheme,
       debugShowCheckedModeBanner: false,
       getPages: Pages.pages,
+      initialRoute: NamedRoute.initialRoute,
     );
   }
 }

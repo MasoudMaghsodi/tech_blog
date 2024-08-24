@@ -1,24 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/models/fake_data.dart';
-import 'package:tech_blog/constant/my_colors.dart';
-import 'package:tech_blog/component/my_component.dart';
-import 'package:tech_blog/constant/my_strings.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tec/component/dimens.dart';
+import 'package:tec/constant/my_colors.dart';
+import 'package:tec/component/my_component.dart';
+import 'package:tec/constant/my_strings.dart';
+import 'package:tec/gen/assets.gen.dart';
+import 'package:tec/models/fake_data/fake_data.dart';
 
-class MyCates extends StatefulWidget {
-  const MyCates({super.key});
+class MyCats extends StatefulWidget {
+  const MyCats({Key? key}) : super(key: key);
 
   @override
-  State<MyCates> createState() => _MyCatesState();
+  State<MyCats> createState() => _MyCatsState();
 }
 
-class _MyCatesState extends State<MyCates> {
+class _MyCatsState extends State<MyCats> {
   @override
   Widget build(BuildContext context) {
-    var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
+    var textTheme = Theme.of(context).textTheme;
     double bodyMargin = size.width / 10;
     return SafeArea(
       child: Scaffold(
@@ -31,101 +32,82 @@ class _MyCatesState extends State<MyCates> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 32,
+                  SizedBox(
+                    height: Dimens.large,
                   ),
                   SvgPicture.asset(
-                    Assets.images.techbot.path,
-                    height: 100,
+                    Assets.images.tcbot.path,
+                    height: Dimens.xlarge + 36,
                   ),
-                  const SizedBox(
-                    height: 16,
+                  SizedBox(
+                    height: Dimens.medium,
                   ),
                   Text(
                     MyStrings.successfulRegistration,
-                    style: textTheme.headlineLarge,
-                  ),
-                  const SizedBox(
-                    height: 32,
+                    style: textTheme.headlineMedium,
                   ),
                   TextField(
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        hintText: "نام و نام خانوادگی",
-                        hintStyle: textTheme.headlineLarge),
+                      alignLabelWithHint: true,
+                      hintText: MyStrings.nameAndFamilyName,
+                      hintStyle: textTheme.headlineMedium,
+                    ),
                   ),
-                  const SizedBox(
-                    height: 32,
+                  SizedBox(
+                    height: Dimens.large,
                   ),
                   Text(
                     MyStrings.chooseCats,
-                    style: textTheme.headlineLarge,
+                    style: textTheme.headlineMedium,
                   ),
-                  // tag list
+                  //taglist
                   Padding(
-                    padding: const EdgeInsets.only(top: 32.0),
+                    padding: EdgeInsets.only(top: Dimens.large),
                     child: SizedBox(
                       width: double.infinity,
-                      height: 100,
+                      height: Dimens.xlarge + 21,
                       child: GridView.builder(
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: tagList.length,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 5,
-                          mainAxisSpacing: 5,
-                          childAspectRatio: 0.3,
-                        ),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                              onTap: () {
+                          physics: const ClampingScrollPhysics(),
+                          itemCount: tagList.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisSpacing: Dimens.small - 3,
+                                  mainAxisSpacing: Dimens.small - 3,
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 0.3),
+                          itemBuilder: ((context, index) {
+                            return InkWell(
+                              onTap: (() {
                                 setState(() {
                                   if (!selectedTags.contains(tagList[index])) {
                                     selectedTags.add(tagList[index]);
                                   } else {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            title: const Text("آیتم موجود است"),
-                                            content: const Text(
-                                                "این آیتم قبلا انتخاب شده است. لطفا گزینه دیگری انتخاب کنید."),
-                                            actions: [
-                                              TextButton(
-                                                child: const Text("باشه"),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                            ],
-                                          );
-                                        });
+                                    debugPrint("${tagList[index].title} exist");
                                   }
                                 });
-                              },
+                              }),
                               child:
-                                  MainTags(textTheme: textTheme, index: index));
-                        },
-                      ),
+                                  MainTags(textTheme: textTheme, index: index),
+                            );
+                          })),
                     ),
                   ),
-                  const SizedBox(
-                    height: 16,
+                  SizedBox(
+                    height: Dimens.medium,
                   ),
                   Image.asset(
                     Assets.icons.downCatArrow.path,
-                    scale: 6,
+                    scale: 3,
                   ),
-                  // selected tags
+                  //selected Tags
                   Padding(
-                    padding: const EdgeInsets.only(top: 32.0),
+                    padding: EdgeInsets.only(top: Dimens.large),
                     child: SizedBox(
                       width: double.infinity,
-                      height: 100,
+                      height: Dimens.xlarge + 21,
                       child: GridView.builder(
                         physics: const ClampingScrollPhysics(),
                         itemCount: selectedTags.length,
@@ -133,40 +115,42 @@ class _MyCatesState extends State<MyCates> {
                         scrollDirection: Axis.horizontal,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
                           crossAxisSpacing: 5,
                           mainAxisSpacing: 5,
+                          crossAxisCount: 2,
                           childAspectRatio: 0.2,
                         ),
-                        itemBuilder: (context, index) {
+                        itemBuilder: ((context, index) {
                           return Container(
-                            height: 60,
+                            height: Dimens.xlarge - 4,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(24),
-                              color: solidColors.surface,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Dimens.medium + 8)),
+                              color: SolidColors.surface,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+                              padding: EdgeInsets.fromLTRB(Dimens.medium,
+                                  Dimens.small, Dimens.small, Dimens.small),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const SizedBox(
-                                    width: 8,
+                                  SizedBox(
+                                    width: Dimens.small,
                                   ),
                                   Text(
                                     selectedTags[index].title,
-                                    style: textTheme.headlineLarge,
+                                    style: textTheme.headlineMedium,
                                   ),
                                   InkWell(
-                                    onTap: () {
+                                    onTap: (() {
                                       setState(() {
                                         selectedTags.removeAt(index);
                                       });
-                                    },
+                                    }),
                                     child: const Icon(
                                       CupertinoIcons.delete,
-                                      color: Colors.grey,
+                                      color: SolidColors.greyColor,
                                       size: 20,
                                     ),
                                   ),
@@ -174,7 +158,7 @@ class _MyCatesState extends State<MyCates> {
                               ),
                             ),
                           );
-                        },
+                        }),
                       ),
                     ),
                   ),
